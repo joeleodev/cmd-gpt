@@ -22,10 +22,15 @@ async function HAL() {
 
     while (true) {
         const userInput = readlineSync.question("You: ".yellow);
-        
-        try {
+            // add prefix to user input
+            const addPrefix = "Only give me the code, make your response very direct. For CSS, give me only TailwindCSS... ";
+
+            const fullPrompt = addPrefix + userInput;
+
             // add user message to chat history
-            chatHistory.push({role: "user", content: userInput});
+            chatHistory.push({role: "user", content: fullPrompt});
+
+        try {
             
             // this bit sends the entire chat history array to openAI
             const chatCompletion = await openai.chat.completions.create({
@@ -37,7 +42,7 @@ async function HAL() {
             const botResponse = chatCompletion.choices[0].message.content;
             chatHistory.push({role: "assistant", content: botResponse});
             
-            console.log("Bot: ".blue + botResponse.green);
+            console.log("Bot: ".blue + botResponse.white);
 
             // user can type exit to end chat or ctrl+c like normal
             if (userInput.toLowerCase() === 'exit') {
