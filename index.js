@@ -23,7 +23,7 @@ async function HAL() {
     while (true) {
         const userInput = readlineSync.question("You: ".yellow);
             // add prefix to user input
-            const addPrefix = "Only give me the code, make your response very direct. For CSS, give me only TailwindCSS... ";
+            const addPrefix = "Give me the most direct answer to this question, every time ";
 
             const fullPrompt = addPrefix + userInput;
 
